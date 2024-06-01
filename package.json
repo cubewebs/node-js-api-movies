@@ -1,0 +1,38 @@
+{
+  "name": "node-js-api-movies",
+  "version": "1.0.0",
+  "description": "REST API con Node.js para practicar",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cubewebs/node-js-api-movies.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "js",
+    "node.js",
+    "rest",
+    "api",
+    "api",
+    "rest",
+    "javascript",
+    "express",
+    "typescript"
+  ],
+  "author": "Juan Jose Aos Rivera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cubewebs/node-js-api-movies/issues"
+  },
+  "homepage": "https://github.com/cubewebs/node-js-api-movies#readme",
+  "devDependencies": {
+    "nodemon": "3.1.2"
+  },
+  "dependencies": {
+    "express": "4.19.2"
+  }
+}
