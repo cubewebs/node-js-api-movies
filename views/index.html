@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Probar API REST</title>
+    <script type="module">
+        fetch('http://localhost:3000/movies')
+            .then(response => response.json())
+            .then(movies => {
+                const html = movies.map(movies => {
+                    return `
+                        <article style="display: flex; flex-direction: column; width: 320px; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px" data-id="${movies.id}">
+                            <h1>${movies.title}</h1>
+                            <img src="${movies.poster}" alt="${movies.title}">
+                            <p>${movies.description}</p>
+                            <p>${movies.year}</p>
+                            <p>${movies.director}</p>
+                            <p>${movies.duration}</p>
+                            <p>${movies.genre}</p>
+                            <p>${movies.rate}</p>
+                            <button>DELETE</button>
+                        </article>
+                    `
+                }).join('');
+                document.write(html);
+                document.addEventListener('click', e => {
+                    if (e.target.matches('button')) {
+                        const article = e.target.closest('article')
+                        const id = article.dataset.id
+                        fetch(`http://localhost:3000/movies/${id}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => {
+                                if (res.ok) {
+                                    article.remove();
+                                }
+                            })
+                    }
+                })
+            })
+    </script>
+</head>
+<body>
+
+</body>
+</html>
