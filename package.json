@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
   "dependencies": {
     "cors": "2.8.5",
     "express": "4.19.2",
+    "mysql2": "3.10.0",
     "zod": "3.23.8"
   }
 }

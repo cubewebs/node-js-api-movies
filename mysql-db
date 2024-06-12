@@ -1,0 +1,59 @@
+-- creación de la base de datos
+CREATE DATABASE moviesdb;
+
+-- usar
+USE moviesdb;
+
+-- crear la tabla movies
+CREATE TABLE movie (
+	id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
+    title TEXT NOT NULL,
+    year INT NOT NULL,
+    director VARCHAR(255) NOT NULL,
+    duration INT NOT NULL,
+    poster TEXT,
+    rate DECIMAL(2, 1) UNSIGNED NOT NULL
+);
+
+CREATE TABLE genre (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE movie_genres (
+	movie_id BINARY(16) REFERENCES movies(id),
+    genre_id INT REFERENCES genres(id),
+    PRIMARY KEY (movie_id, genre_id)
+);
+
+
+INSERT INTO genre (name) VALUES
+('Drama'),
+('Action'),
+('Crime'),
+('Adventure'),
+('Sci-Fi'),
+('Romance'),
+('Comedy'),
+('Horror'),
+('Thiller'),
+('Documentary'),
+('Fantasy'),
+('Musical'),
+('War'),
+('History'),
+('Noir');
+
+INSERT INTO movie (id, title, year, director, duration, poster, rate) VALUES
+(UUID_TO_BIN(UUID()), "Atlas", 2024, "Brad Peyton", 118, "https://fastly-s3.allmovie.com/iva/movie/575441/300/575441.jpg", 6.1),
+(UUID_TO_BIN(UUID()), "Furiosa: A Mad Max Saga", 2024, "George Miller", 149, "https://fastly-s3.allmovie.com/iva/movie/238787/300/238787.jpg", 7.9),
+(UUID_TO_BIN(UUID()), "Kingdom of the Planet of the Apes", 2024, "Wes Ball", 145, "https://fastly-s3.allmovie.com/iva/movie/560718/300/560718.jpg", 7.0);
+
+INSERT INTO movie_genres (movie_id, genre_id)
+VALUES
+	((SELECT id FROM movie WHERE title="Atlas"), (SELECT id FROM genre WHERE name="Sci-Fi")),
+    ((SELECT id FROM movie WHERE title="Furiosa: A Mad Max Saga"), (SELECT id FROM genre WHERE name="Sci-Fi")),
+    ((SELECT id FROM movie WHERE title="Furiosa: A Mad Max Saga"), (SELECT id FROM genre WHERE name="Action")),
+    ((SELECT id FROM movie WHERE title="Kingdom of the Planet of the Apes"), (SELECT id FROM genre WHERE name="Sci-Fi"));
+
+SELECT * FROM movie;
